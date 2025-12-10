@@ -131,10 +131,4 @@ php artisan serve
 - **Authentication**: Laravel UI
 - **Email**: Gmail SMTP
 
-## License
 
-This project is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
-
-## Contact
-
-For questions or issues, please contact: rwbuild@rwandabuildprogram.com
