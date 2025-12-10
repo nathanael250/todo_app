@@ -127,7 +127,7 @@ php artisan serve
 
 - **Backend**: Laravel 10
 - **Frontend**: Blade Templates with Tailwind CSS
-- **Database**: MySQL/PostgreSQL/SQLite
+- **Database**: MySQL
 - **Authentication**: Laravel UI
 - **Email**: Gmail SMTP
 
