@@ -1,66 +1,140 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# Todo Application
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+A simple Todo application built with Laravel 10, featuring user authentication, CRUD operations, and a modern UI with Tailwind CSS.
 
-## About Laravel
+## Features
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+- User authentication (Login, Register, Password Reset)
+- Create, Read, Update, and Delete todos
+- Mark todos as completed (one-way operation)
+- Users can only access their own todos
+- Form validation with error display
+- Responsive design with Tailwind CSS
+- Password reset via Gmail SMTP
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+## Requirements
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+- PHP >= 8.1
+- Composer
+- Node.js and NPM
+- MySQL/PostgreSQL/SQLite
+- Gmail account (for password reset functionality)
 
-## Learning Laravel
+## Installation
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+1. Clone the repository:
+```bash
+git clone <repository-url>
+cd todo_app
+```
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+2. Install PHP dependencies:
+```bash
+composer install
+```
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+3. Install Node dependencies:
+```bash
+npm install
+```
 
-## Laravel Sponsors
+4. Copy environment file:
+```bash
+cp .env.example .env
+```
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+5. Generate application key:
+```bash
+php artisan key:generate
+```
 
-### Premium Partners
+6. Configure your `.env` file with database credentials:
+```env
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE=your_database_name
+DB_USERNAME=your_username
+DB_PASSWORD=your_password
+```
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[WebReinvent](https://webreinvent.com/)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Jump24](https://jump24.co.uk)**
-- **[Redberry](https://redberry.international/laravel/)**
-- **[Active Logic](https://activelogic.com)**
-- **[byte5](https://byte5.de)**
-- **[OP.GG](https://op.gg)**
+7. Configure Gmail SMTP settings in `.env`:
+```env
+MAIL_MAILER=smtp
+MAIL_HOST=smtp.gmail.com
+MAIL_PORT=587
+MAIL_USERNAME=your_email@gmail.com
+MAIL_PASSWORD=your_app_password
+MAIL_ENCRYPTION=tls
+MAIL_FROM_ADDRESS="your_email@gmail.com"
+MAIL_FROM_NAME="Ishuli LMS"
+```
 
-## Contributing
+8. Run migrations:
+```bash
+php artisan migrate
+```
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+9. Build assets:
+```bash
+npm run build
+# Or for development with hot reload:
+npm run dev
+```
 
-## Code of Conduct
+10. Start the development server:
+```bash
+php artisan serve
+```
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+11. Visit `http://localhost:8000` in your browser.
 
-## Security Vulnerabilities
+## Usage
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+1. **Register/Login**: Create an account or login with existing credentials
+2. **Create Todo**: Click "Create Todo" to add a new task
+3. **View Todos**: All your todos are listed on the main page
+4. **Edit Todo**: Click "Edit" to modify a todo
+5. **Mark Complete**: Click "Mark as Complete" to complete a task (cannot be undone)
+6. **Delete Todo**: Click "Delete" to remove a todo
+7. **Password Reset**: Use "Forgot Password" link on login page
+
+## Todo Fields
+
+- **title** (required): The todo title
+- **description** (optional): Additional details
+- **due_date** (required): When the todo is due
+- **is_completed** (boolean): Completion status
+
+## Routes
+
+- `GET /todos` - List all todos
+- `GET /todos/create` - Show create form
+- `POST /todos` - Store new todo
+- `GET /todos/{todo}/edit` - Show edit form
+- `PUT/PATCH /todos/{todo}` - Update todo
+- `DELETE /todos/{todo}` - Delete todo
+- `PATCH /todos/{todo}/toggle-complete` - Mark todo as complete
+
+## Security
+
+- All todo routes are protected by authentication middleware
+- Users can only access their own todos (enforced by policies)
+- Password reset uses secure token-based system
+- CSRF protection enabled on all forms
+
+## Technologies Used
+
+- **Backend**: Laravel 10
+- **Frontend**: Blade Templates with Tailwind CSS
+- **Database**: MySQL/PostgreSQL/SQLite
+- **Authentication**: Laravel UI
+- **Email**: Gmail SMTP
 
 ## License
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+This project is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+
+## Contact
+
+For questions or issues, please contact: rwbuild@rwandabuildprogram.com

@@ -36,7 +36,7 @@ class TodoController extends Controller
     public function store(Request $request)
     {
         $validated = $request->validate([
-            'title' => 'required|string|max:255',
+            'title' => 'required|string|max:150',
             'description' => 'nullable|string',
             'due_date' => 'required|date',
         ]);
@@ -73,7 +73,7 @@ class TodoController extends Controller
         $this->authorize('update', $todo);
 
         $validated = $request->validate([
-            'title' => 'required|string|max:255',
+            'title' => 'required|string|max:150',
             'description' => 'nullable|string',
             'due_date' => 'required|date',
         ]);
